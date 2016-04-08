@@ -10,7 +10,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'elixir-lang/vim-elixir'
 Plug 'airblade/vim-gitgutter'
-Plug 'floobits/floobits-neovim'
+" Plug 'floobits/floobits-neovim'
 
 call plug#end()
 
