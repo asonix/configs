@@ -9,7 +9,8 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd "$( dirname "$SOURCE}" )" && pwd )"
 
-cp -r "$HOME/.config/i3*" "$DIR" # copy i3 config and i3status config
+cp -r "$HOME/.config/i3" "$DIR" # copy i3 config
+cp -r "$HOME/.config/i3status" "$DIR" # copy i3status config
 cp -r "$HOME/.zsh*" "$DIR" # copy zsh configs
 cp -r "$HOME/.profile" "$DIR" # copy profile
 cp "$HOME/.config/nvim/init.vim" "$DIR" # copy nvim config

@@ -1,0 +1,293 @@
+# Riley's i3 config file (v4.7.2)
+
+set $mod Mod4
+
+# font for window titles. ISO 10646 = Unicode
+# font -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
+font pango: Fantasque Sans Mono 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# i3lock
+
+# start a terminal
+bindsym $mod+Return exec gnome-terminal
+
+# kill focused window
+bindsym $mod+Shift+Q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+
+# application shortcuts
+bindsym $mod+g exec google-chrome-stable
+bindsym $mod+n exec gnome-terminal -e ncmpcpp
+bindsym $mod+y exec switchboard
+bindsym $mod+Mod1+y exec pantheon-files
+bindsym $mod+Mod1+n exec noise
+bindsym $mod+p exec ~/./Scripts/comptonLock.sh
+
+# HANDLED BY XBINDKEYS
+# # ncmpcpp controls
+# bindsym $mod+Mod1+h exec ncmpcpp prev
+# bindsym $mod+Mod1+l exec ncmpcpp next
+# bindsym $mod+Mod1+k exec amixer set Master 5%+
+# bindsym $mod+Mod1+j exec amixer set Master 5%-
+# bindsym $mod+Mod1+space exec ncmpcpp toggle
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+H move left
+bindsym $mod+Shift+J move down
+bindsym $mod+Shift+K move up
+bindsym $mod+Shift+L move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, default)
+bindsym $mod+q layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout default
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+# bindsym $mod+a focus parent
+
+# focus the child container
+# bindcode $mod+d focus child
+
+# class                 border  backgr. text    indicator
+client.focused          #2aa198 #2aa198 #fdf6e3 #2aa198
+client.focused_inactive #586E75 #586E75 #fdf6e3 #586E75
+client.unfocused        #586E75 #586E75 #fdf6e3 #586E75
+client.urgent           #dc322f #dc322f #fdf6e3 #dc322f
+
+# Window 2
+new_window pixel 2
+new_float  pixel 2
+
+# Gaps
+gaps inner 45
+gaps outer 0
+
+# border
+hide_edge_borders none
+
+# scratchpad
+bindsym F1 move scratchpad
+bindsym F2 scratchpad show
+
+# workspace names
+workspace "I" output xinerama-0
+workspace "II" output xinerama-0
+workspace "III" output xinerama-0
+workspace "IV" output xinerama-0
+workspace "V" output xinerama-0
+workspace "VI" output xinerama-0
+workspace "VII" output xinerama-0
+workspace "VIII" output xinerama-0
+workspace "IX" output xinerama-0
+workspace "ODT" output xinerama-0
+workspace "WWW" output xinerama-0
+workspace "DEV" output xinerama-0
+workspace "REC" output xinerama-0
+workspace "MSG" output xinerama-0
+workspace "IMG" output xinerama-0
+
+# switch to workspace
+bindsym $mod+1 workspace I
+bindsym $mod+2 workspace II
+bindsym $mod+3 workspace III
+bindsym $mod+4 workspace IV
+bindsym $mod+5 workspace V
+bindsym $mod+6 workspace VI
+bindsym $mod+7 workspace VII
+bindsym $mod+8 workspace VIII
+bindsym $mod+9 workspace IX
+bindsym $mod+0 workspace ODT
+bindsym $mod+i workspace WWW
+bindsym $mod+o workspace DEV
+bindsym $mod+u workspace REC
+bindsym $mod+s workspace MSG
+bindsym $mod+a workspace IMG
+# move focused container to workspace
+bindsym $mod+Shift+exclam move workspace I
+bindsym $mod+Shift+at move workspace II
+bindsym $mod+Shift+numbersign move workspace III
+bindsym $mod+Shift+dollar move workspace IV
+bindsym $mod+Shift+percent move workspace V
+bindsym $mod+Shift+asciicircum move workspace VI
+bindsym $mod+Shift+ampersand move workspace VII
+bindsym $mod+Shift+asterisk move workspace VIII
+bindsym $mod+Shift+parenleft move workspace IX
+bindsym $mod+Shift+parenright move workspace ODT
+bindsym $mod+Shift+I move workspace WWW
+bindsym $mod+Shift+O move workspace DEV
+bindsym $mod+Shift+U move workspace REC
+bindsym $mod+Shift+S move workspace MSG
+bindsym $mod+Shift+A move workspace IMG
+
+#Assign workspaces to screens
+workspace WWW output eDP1
+workspace IMG output eDP1
+workspace REC output DP1
+workspace MSG output DP1
+
+#Assign applications to workspaces
+assign [class="google-chrome"] WWW
+assign [class="Firefox"] WWW
+assign [class="Midori"] WWW
+assign [class="Chromium-browser"] WWW
+assign [class="Komodo edit"] DEV
+assign [class="Noise"] REC
+assign [class="Skype"] MSG
+assign [class="Telegram"] MSG
+assign [class="Gimp"] IMG
+assign [class="Inkscape"] IMG
+assign [class="Et"] ODT
+assign [class="Wps"] ODT
+assign [class="Wpp"] ODT
+assign [class="libreoffice"] ODT
+assign [class="libreoffice-writer"] ODT
+assign [class="libreoffice-calc"] ODT
+assign [class="libreoffice-impress"] ODT
+assign [class="libreoffice-draw"] ODT
+assign [class="libreoffice-startcenter"] ODT
+assign [class="Pidgin"] MSG
+
+#floating
+for_window [class="Gnome-calculator"] floating enable
+for_window [class="Switchboard"] floating enable
+for_window [class="Gimp"] floating disable
+for_window [class="Simplescreenrecorder"] floating enable
+for_window [class="qemu-system-arm_Linux_x86_64"] floating enable
+
+# reload, restart, exit
+bindsym $mod+Shift+C reload
+bindsym $mod+Shift+R restart
+bindsym $mod+Shift+E exit
+
+# resize windows
+mode "resize" {
+  bindsym Shift+H     resize shrink width  5px or 5 ppt
+  bindsym Shift+J     resize shrink height 5px or 5 ppt
+  bindsym Shift+K     resize grow   height 5px or 5 ppt
+  bindsym Shift+L     resize grow   width  5px or 5 ppt
+
+  bindsym Shift+Left  resize shrink width  5px or 5 ppt
+  bindsym Shift+Down  resize shrink height 5px or 5 ppt
+  bindsym Shift+Up    resize grow   height 5px or 5 ppt
+  bindsym Shift+Right resize grow   width  5px or 5 ppt
+
+  # exit resize mode
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+
+# toggle resize
+bindsym $mod+r mode "resize"
+
+# alter gaps
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+  bindsym o      mode "$mode_gaps_outer"
+  bindsym i      mode "$mode_gaps_inner"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+  bindsym plus  gaps inner current plus 5
+  bindsym minus gaps inner current minus 5
+  bindsym 0     gaps inner current set 0
+
+  bindsym Shift+plus  gaps inner all plus 5
+  bindsym Shift+minus gaps inner all minus 5
+  bindsym Shift+0     gaps inner all set 0
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+  bindsym plus  gaps outer current plus 5
+  bindsym minus gaps outer current minus 5
+  bindsym 0     gaps outer current set 0
+
+  bindsym Shift+plus  gaps outer all plus 5
+  bindsym Shift+minus gaps outer all minus 5
+  bindsym Shift+0     gaps outer all set 0
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+floating_minimum_size 250 x 50
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+  position top
+  status_command i3status
+  mode hide
+  hidden_state hide
+  modifier $mod
+  #tray_output DP1
+
+  colors {
+    background #073642
+    statusline #93a1a1
+    separator  #93a1a1
+
+    # class              border	 bckgrnd text
+    focused_workspace    #2aa198 #2aa198 #073642
+    active_workspace     #073642 #073642 #93a1a1
+    inactive_workspace   #073642 #073642 #93a1a1
+    urgent_workspace     #dc322f #dc322f #073642
+  }
+}
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon-localeexec
+# exec --no-startup-id pasystray
+exec --no-startup-id compton
+#exec --no-startup-id google-chrome-stable
+#exec --no-startup-id mpd
+#exec --no-startup-id mpdscribble
+exec --no-startup-id nm-applet
+exec --no-startup-id xbindkeys
+exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,gpg,secrets
+exec --no-startup-id ~/./Scripts/wallpaper.sh
+# exec --no-startup-id sleep 1 && ~/./.reread.sh
+exec --no-startup-id ~/Development/git/i3-alternating-layout/alternating_layouts.py

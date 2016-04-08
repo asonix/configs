@@ -18,9 +18,10 @@ if [ ! -f "$HOME/.config/nvim/autoload/plug.vim" ]; then
     "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 fi
 
-cp -r "$DIR/i3*" "$HOME/.config"
+cp -r "$DIR/i3" "$HOME/.config"
+cp -r "$DIR/i3status" "$HOME/.config"
 cp -r "$DIR/.zsh*" "$HOME"
-cp -R "$DIR/.profile" "$HOME"
+cp "$DIR/.profile" "$HOME"
 cp "$DIR/subtle.rb" "$HOME/.config"
 cp "$DIR/compton.conf" "$HOME/.config"
 cp "$DIR/.Xresources" "$HOME"
