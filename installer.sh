@@ -9,6 +9,10 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd "$( dirname "$SOURCE}" )" && pwd )"
 
+pushd $(pwd) > /dev/null
+cd "$DIR"
+popd > /dev/null
+
 # setup neovim
 mkdir -p "$HOME/.config/nvim/autoload"
 cp "$DIR/init.vim" "$HOME/.config/nvim/"
