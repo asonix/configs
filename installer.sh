@@ -20,7 +20,8 @@ fi
 
 cp -r "$DIR/i3" "$HOME/.config"
 cp -r "$DIR/i3status" "$HOME/.config"
-cp -r "$DIR/.zsh*" "$HOME"
+cp "$DIR/.zshrc" "$HOME"
+cp "$DIR/.zshenv" "$HOME"
 cp "$DIR/.profile" "$HOME"
 cp "$DIR/subtle.rb" "$HOME/.config"
 cp "$DIR/compton.conf" "$HOME/.config"
