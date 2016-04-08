@@ -4,7 +4,7 @@ export XDG_CONFIG_HOME
 # export english/us/utf8 as language env variable
 export LANG=en_US.UTF-8
 
-export DEFAULT_USER=asonix
+export DEFAULT_USER=$(whoami)
 
 if ! pgrep -u $USER ssh-agent > /dev/null; then
   ssh-agent > ~/.config/ssh-agent-status
