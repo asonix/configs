@@ -4,7 +4,7 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 # font -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
-font pango: Fantasque Sans Mono 12
+font pango: Fantasque Sans Mono 24
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -262,21 +262,21 @@ floating_minimum_size 250 x 50
 bar {
   position top
   status_command i3status
-  mode hide
-  hidden_state hide
+  # mode hide
+  # hidden_state hide
   modifier $mod
   #tray_output DP1
 
   colors {
-    background #073642
+    background #2b2b2b
     statusline #93a1a1
     separator  #93a1a1
 
     # class              border	 bckgrnd text
-    focused_workspace    #2aa198 #2aa198 #073642
-    active_workspace     #073642 #073642 #93a1a1
-    inactive_workspace   #073642 #073642 #93a1a1
-    urgent_workspace     #dc322f #dc322f #073642
+    focused_workspace    #2aa198 #2aa198 #2b2b2b
+    active_workspace     #2b2b2b #2b2b2b #93a1a1
+    inactive_workspace   #2b2b2b #2b2b2b #93a1a1
+    urgent_workspace     #dc322f #dc322f #2b2b2b
   }
 }
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon-localeexec

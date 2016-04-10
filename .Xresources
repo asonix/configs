@@ -1,6 +1,14 @@
+Xft.dpi: 211
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
 XTerm*locale: true
 *saveLines: 4096
-XTerm*faceName: Fantasque Sans Mono:pixelsize=16
+XTerm*faceName: xft:Fantasque Sans Mono:pixelsize=16
 
 !*fading: 0
 *internalBorder: 0
@@ -62,8 +70,8 @@ XTerm*borderWidth: 0
 !URxvt*depth: 32
 !URxvt*background: #151515
 
-URxvt*font: xft:Fantasque Sans Mono:size=12
-!URxvt*letterSpace: -1
+*font: xft:Fantasque Sans Mono:size=12
+URxvt*letterSpace: -1
 URxvt*urlLauncher: firefox
 URxvt*scrollBar: false
 URxvt*scrollBar_right: false
