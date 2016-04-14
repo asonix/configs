@@ -19,14 +19,11 @@ else
   fi
 fi
 
-cd Development/git/xSwipe
-perl xSwipe.pl -n &
-cd
+# cd Development/git/xSwipe
+# perl xSwipe.pl -n &
+# cd
 
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
-
-xrandr --dpi 211
-# xrandr --output eDP1 --scale 1.3x1.3
 
 ssh-add -l > /dev/null || alias ssh='ssh-add -l > /dev/null || ssh-add && unalias ssh; ssh'
