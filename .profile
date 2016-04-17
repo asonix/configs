@@ -23,7 +23,7 @@ fi
 # perl xSwipe.pl -n &
 # cd
 
-xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 xrandr --dpi 211
 
