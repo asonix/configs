@@ -23,6 +23,10 @@ fi
 # perl xSwipe.pl -n &
 # cd
 
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+xrandr --dpi 211
+
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
 

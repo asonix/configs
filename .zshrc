@@ -258,4 +258,4 @@ setopt completealiases
 
 eval "$(rbenv init -)"
 
-xset r rate 225 40
+# xset r rate 225 40
