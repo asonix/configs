@@ -14,7 +14,7 @@ export BROWSER=google-chrome-stable
 export VST_PATH="/usr/lib/vst:/usr/local/lib/vst:~/.vst:/media/windows-data/VST"
 
 typeset -U path
-path=(/root/.gem/ruby/2.2.0/bin ~/Development/git/flutter/bin $(ruby -e 'print Gem.user_dir')/bin ~/Scripts $path[@])
+path=(/root/.gem/ruby/2.2.0/bin ~/Development/JavaScript/.npm-global/bin ~/Development/git/flutter/bin $(ruby -e 'print Gem.user_dir')/bin ~/Scripts $path[@])
 
 if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"

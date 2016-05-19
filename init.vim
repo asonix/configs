@@ -1,15 +1,17 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'rust-lang/rust.vim'
+Plug 'dsawardekar/ember.vim'
+Plug 'elixir-lang/vim-elixir'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'rust-lang/rust.vim'
+Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'elixir-lang/vim-elixir'
-Plug 'airblade/vim-gitgutter'
 " Plug 'floobits/floobits-neovim'
 
 call plug#end()
@@ -66,6 +68,10 @@ let g:syntastic_cpp_compiler_options = ' -std=c++14'
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_python_pyflakes_exec = '/usr/bin/pyflakes-python2'
 let g:syntastic_python_python_exec = '/python2'
+
+let g:syntastic_enable_elixir_checker = 1
+
+let g:syntastic_javascript_jslint_args = "--white --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --edition=latest"
 
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
