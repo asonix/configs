@@ -71,7 +71,8 @@ let g:syntastic_python_python_exec = '/python2'
 
 let g:syntastic_enable_elixir_checker = 1
 
-let g:syntastic_javascript_jslint_args = "--white --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --edition=latest"
+" let g:syntastic_javascript_jslint_args = '--white --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --edition=latest'
+let g:syntastic_javascript_checkers = ['jshint']
 
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
