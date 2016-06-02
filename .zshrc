@@ -56,38 +56,38 @@ alias ls='ls --color'
 # File & strings related functions:
 #-------------------------------------------------------------
 
-function extract()      # Handy Extract Program
+extract()      # Handy Extract Program
 {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xvjf $1     ;;
-            *.tar.gz)    tar xvzf $1     ;;
-            *.bz2)       bunzip2 $1      ;;
-            *.rar)       unrar x $1      ;;
-            *.gz)        gunzip $1       ;;
-            *.tar)       tar xvf $1      ;;
-            *.tbz2)      tar xvjf $1     ;;
-            *.tgz)       tar xvzf $1     ;;
-            *.zip)       unzip $1        ;;
-            *.Z)         uncompress $1   ;;
-            *.7z)        7z x $1         ;;
-            *)           echo "'$1' cannot be extracted via >extract<" ;;
-        esac
-    else
-        echo "'$1' is not a valid file!"
-    fi
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xvjf $1     ;;
+      *.tar.gz)    tar xvzf $1     ;;
+      *.bz2)       bunzip2 $1      ;;
+      *.rar)       unrar x $1      ;;
+      *.gz)        gunzip $1       ;;
+      *.tar)       tar xvf $1      ;;
+      *.tbz2)      tar xvjf $1     ;;
+      *.tgz)       tar xvzf $1     ;;
+      *.zip)       unzip $1        ;;
+      *.Z)         uncompress $1   ;;
+      *.7z)        7z x $1         ;;
+      *)           echo "'$1' cannot be extracted via >extract<" ;;
+    esac
+  else
+    echo "'$1' is not a valid file!"
+  fi
 }
 
 ttyctl -f
 
-function parse_git_dirty {
-    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
+parse_git_dirty() {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
 }
-function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+parse_git_branch() {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
-function parse_current_dir {
-    ruby -e "puts ('../'+Dir.getwd.split('/').last(2).join('/')).gsub('//', '/')"
+parse_current_dir() {
+  ruby -e "puts ('../'+Dir.getwd.split('/').last(2).join('/')).gsub('//', '/')"
 }
 
 
@@ -104,19 +104,19 @@ prompt_segment() {
   local bg fg
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
-  if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+  if [[ $CURRENT_BG != 'NONE' ]]; then
+    echo -n " %{%K{blue}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$bg%}%{%F{blue}%}$SEGMENT_SEPARATOR%{$bg%}%{$fg%} "
   else
     echo -n "%{$bg%}%{$fg%} "
   fi
   CURRENT_BG=$1
-  [[ -n $3 ]] && echo -n $3
+  [[ -n $3 ]] && echo -n "$3"
 }
 
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    echo -n " %{%K{blue}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{%K{$CURRENT_BG}%}%{%F{blue}%}$SEGMENT_SEPARATOR%{%k%}"
   else
     echo -n "%{%k%}"
   fi
@@ -130,7 +130,7 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment blue black "%(!.%{%F{yellow}%}.)$USER@%m"
+    prompt_segment black white "%(!.%{%F{yellow}%}.)$USER@%m"
   fi
 }
 
@@ -143,9 +143,9 @@ prompt_git() {
     dirty=$(parse_git_dirty)
     ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
     if [[ -n $dirty ]]; then
-      prompt_segment magenta black
+      prompt_segment black magenta
     else
-      prompt_segment cyan black
+      prompt_segment black green
     fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
@@ -177,15 +177,15 @@ prompt_hg() {
     if $(hg prompt >/dev/null 2>&1); then
       if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
         # if files are not added
-        prompt_segment red black
+        prompt_segment black red
         st='±'
       elif [[ -n $(hg prompt "{status|modified}") ]]; then
         # if any modification
-        prompt_segment magenta black
+        prompt_segment black magenta
         st='±'
       else
         # if working copy is clean
-        prompt_segment cyan black
+        prompt_segment black green
       fi
       echo -n $(hg prompt "☿ {rev}@{branch}") $st
     else
@@ -196,10 +196,10 @@ prompt_hg() {
         prompt_segment red black
         st='±'
       elif `hg st | grep -q "^[MA]"`; then
-        prompt_segment magenta black
+        prompt_segment black magenta
         st='±'
       else
-        prompt_segment cyan black
+        prompt_segment black green
       fi
       echo -n "☿ $rev@$branch" $st
     fi
@@ -208,14 +208,14 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment white black '%~'
+  prompt_segment black red '%~'
 }
 
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment blue black "(`basename $virtualenv_path`)"
+    prompt_segment black blue "(`basename $virtualenv_path`)"
   fi
 }
 
@@ -246,8 +246,7 @@ build_prompt() {
 }
 
 PROMPT='
-%{%f%b%k%}$(build_prompt)
-%{%f%b%k%} '
+%{%f%b%k%}$(build_prompt) '
 
 zstyle ':completion:*' menu select
 
