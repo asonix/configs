@@ -2,11 +2,6 @@
 BASE16_SHELL="$HOME/Development/git/base16-shell/base16-solarized.light.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-# aliases
-alias ls='ls --color=auto'
-alias classify='classify -d 30'
-alias vim='nvim'
-
 # History
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -41,6 +36,8 @@ alias testpl='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
 alias rm='rm -iv'
 alias cp='cp -iv'
 alias mv='mv -iv'
+alias classify='classify -d 30'
+alias vim='nvim'
 
 # -> Prevents accidentally clobbering files.
 alias mkdir='mkdir -p'
@@ -133,7 +130,7 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment white black "%(!.%{%F{yellow}%}.)$USER@%m"
+    prompt_segment blue black "%(!.%{%F{yellow}%}.)$USER@%m"
   fi
 }
 
@@ -211,7 +208,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue black '%~'
+  prompt_segment white black '%~'
 }
 
 # Virtualenv: current working virtualenv
