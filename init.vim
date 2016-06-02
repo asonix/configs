@@ -15,9 +15,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
-colorscheme base16-solarized
+colorscheme base16-eighties
 let base16colorspace=256
-set background=light " dark | light "
+set background=dark " dark | light "
 
 filetype plugin indent on
 set laststatus=2
