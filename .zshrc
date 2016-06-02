@@ -1,5 +1,5 @@
 # Base16 Shell
-BASE16_SHELL="$HOME/Development/git/base16-shell/base16-twilight.dark.sh"
+BASE16_SHELL="$HOME/Development/git/base16-shell/base16-solarized.light.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # aliases
@@ -84,7 +84,7 @@ function extract()      # Handy Extract Program
 ttyctl -f
 
 function parse_git_dirty {
-    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
 }
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
@@ -133,7 +133,7 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment 246 235 "%(!.%{%F{yellow}%}.)$USER@%m"
+    prompt_segment white black "%(!.%{%F{yellow}%}.)$USER@%m"
   fi
 }
 
@@ -146,9 +146,9 @@ prompt_git() {
     dirty=$(parse_git_dirty)
     ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
     if [[ -n $dirty ]]; then
-      prompt_segment 172 black
+      prompt_segment magenta black
     else
-      prompt_segment green black
+      prompt_segment cyan black
     fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
@@ -180,15 +180,15 @@ prompt_hg() {
     if $(hg prompt >/dev/null 2>&1); then
       if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
         # if files are not added
-        prompt_segment red white
+        prompt_segment red black
         st='±'
       elif [[ -n $(hg prompt "{status|modified}") ]]; then
         # if any modification
-        prompt_segment yellow black
+        prompt_segment magenta black
         st='±'
       else
         # if working copy is clean
-        prompt_segment green black
+        prompt_segment cyan black
       fi
       echo -n $(hg prompt "☿ {rev}@{branch}") $st
     else
@@ -199,10 +199,10 @@ prompt_hg() {
         prompt_segment red black
         st='±'
       elif `hg st | grep -q "^[MA]"`; then
-        prompt_segment yellow black
+        prompt_segment magenta black
         st='±'
       else
-        prompt_segment green black
+        prompt_segment cyan black
       fi
       echo -n "☿ $rev@$branch" $st
     fi
@@ -211,7 +211,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment 239 248 '%~'
+  prompt_segment blue black '%~'
 }
 
 # Virtualenv: current working virtualenv
@@ -250,7 +250,7 @@ build_prompt() {
 
 PROMPT='
 %{%f%b%k%}$(build_prompt)
- '
+%{%f%b%k%} '
 
 zstyle ':completion:*' menu select
 
