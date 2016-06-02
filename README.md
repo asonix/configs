@@ -10,6 +10,7 @@ the Compton compositor, neovim, urxvt, and zsh), just run `./installer`
 
 ### Eighties Dark
 ![Screenshot from 2016-06-02 17-44-45.png](pics/Screenshot from 2016-06-02 17-44-45.png?raw=true)
+![Screenshot from 2016-06-02\ 17-54-39.png](pics/Screenshot from 2016-06-02\ 17-54-39.png?raw=true)
 ### Twilight Dark
 ![Screenshot from 2016-04-08 15-50-22.png](pics/Screenshot from 2016-04-08 15-50-22.png?raw=true)
 ![Screenshot from 2016-04-08 15-52-55.png](pics/Screenshot from 2016-04-08 15-52-55.png?raw=true)
