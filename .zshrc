@@ -5,6 +5,15 @@ BASE16_SHELL="$HOME/Development/git/base16-shell/base16-eighties.dark.sh"
 # Z
 Z_SH="/usr/lib/z.sh"
 [[ -s $Z_SH ]] && source $Z_SH
+
+# Syntax highlighting
+ZSH_SYNTAX_HIGHLIGHT="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -s $ZSH_SYNTAX_HIGHLIGHT ]]
+then
+  source $ZSH_SYNTAX_HIGHLIGHT
+  ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+fi
+
 # History
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -25,10 +34,6 @@ promptinit
 
 # prompt
 prompt elite
-
-# Syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 #-------------------
 # Personnal Aliases
