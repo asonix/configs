@@ -2,6 +2,9 @@
 BASE16_SHELL="$HOME/Development/git/base16-shell/base16-eighties.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
+# Z
+Z_SH="/usr/lib/z.sh"
+[[ -s $Z_SH ]] && source $Z_SH
 # History
 HISTFILE=~/.histfile
 HISTSIZE=1000
