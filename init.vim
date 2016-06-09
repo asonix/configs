@@ -10,6 +10,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -43,7 +44,7 @@ if has('vim_starting')
 endif
 filetype plugin indent on
 
-"set mouse=a
+set mouse-=a
 
 let g:airline_powerline_fonts = 1
 let g:airline_section_b = '%{strftime("%c")}'
