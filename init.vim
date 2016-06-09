@@ -80,3 +80,5 @@ let g:rustfmt_autosave = 1
 
 nmap <f8> :TagbarToggle<CR>
 nmap <f9> :!pdflatex %<CR>
+
+set clipboard+=unnamedplus
