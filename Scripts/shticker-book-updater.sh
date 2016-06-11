@@ -8,6 +8,7 @@ TMPDIR="$HOME/aur/tmp"
 
 pushd $(pwd) > /dev/null
 
+rm -rf "$TMPDIR"
 mkdir -p "$TMPDIR"
 cp "$PKGDIR/PKGBUILD" "$TMPDIR"
 
