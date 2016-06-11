@@ -98,6 +98,9 @@ parse_current_dir() {
   ruby -e "puts ('../'+Dir.getwd.split('/').last(2).join('/')).gsub('//', '/')"
 }
 
+spell() {
+  echo "$1" | hunspell
+}
 
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
