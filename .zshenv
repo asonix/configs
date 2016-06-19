@@ -9,7 +9,7 @@ export LO_USE_NOTEBOOKBAR=1
 
 export PANEL_FIFO=/tmp/panel.fifo
 export EDITOR=nvim
-export BROWSER=google-chrome-stable
+export BROWSER=chromium
 # export PATH="~/Scripts:$PATH"
 export VST_PATH="/usr/lib/vst:/usr/local/lib/vst:~/.vst:/media/windows-data/VST"
 

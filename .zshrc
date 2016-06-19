@@ -46,6 +46,7 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias classify='classify -d 30'
 alias vim='nvim'
+alias grep='grep --color=always'
 
 # -> Prevents accidentally clobbering files.
 alias mkdir='mkdir -p'
