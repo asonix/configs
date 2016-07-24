@@ -8,7 +8,7 @@ Xft.rgba: rgb
 
 XTerm*locale: true
 *saveLines: 4096
-XTerm*faceName: xft:Fantasque Sans Mono:pixelsize=16
+XTerm*faceName: xft:Fantasque Sans Mono:pixelsize=32
 
 !*fading: 0
 *internalBorder: 0
@@ -70,7 +70,7 @@ XTerm*borderWidth: 0
 !URxvt*depth: 32
 !URxvt*background: #151515
 
-*font: xft:Fantasque Sans Mono:size=12
+*font: xft:monofur for powerline:size=12
 URxvt*letterSpace: -1
 URxvt*urlLauncher: firefox
 URxvt*scrollBar: false

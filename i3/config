@@ -4,7 +4,7 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 # font -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
-font pango: Fantasque Sans Mono 12
+font pango: monofur for Powerlin 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

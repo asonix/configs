@@ -117,7 +117,7 @@ prompt_segment() {
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   if [[ $CURRENT_BG != 'NONE' ]]; then
-    echo -n " %{%K{blue}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$bg%}%{%F{blue}%}$SEGMENT_SEPARATOR%{$bg%}%{$fg%} "
+    echo -n " %{%K{cyan}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$bg%}%{%F{cyan}%}$SEGMENT_SEPARATOR%{$bg%}%{$fg%} "
   else
     echo -n "%{$bg%}%{$fg%} "
   fi
@@ -128,7 +128,7 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%K{blue}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{%K{$CURRENT_BG}%}%{%F{blue}%}$SEGMENT_SEPARATOR%{%k%}"
+    echo -n " %{%K{cyan}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{%K{$CURRENT_BG}%}%{%F{cyan}%}$SEGMENT_SEPARATOR%{%k%}"
   else
     echo -n "%{%k%}"
   fi
@@ -142,7 +142,7 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black white "%(!.%{%F{yellow}%}.)$USER@%m"
+    prompt_segment black red "%(!.%{%F{yellow}%}.)$USER@%m"
   fi
 }
 
@@ -220,14 +220,14 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment black red '%~'
+  prompt_segment black blue '%~'
 }
 
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment black blue "(`basename $virtualenv_path`)"
+    prompt_segment black cyan "(`basename $virtualenv_path`)"
   fi
 }
 
