@@ -19,7 +19,7 @@ cp "$HOME/.config/subtle.rb" "$DIR" # copy subtle config
 cp "$HOME/.config/compton.conf" "$DIR" # copy compton config
 cp "$HOME/.Xresources" "$DIR" # copy xterm and urxvt configs
 
-cp -r "$HOME/Scripts" "$DIR" # copy scripts
+cp -r "$HOME/.local/bin" "$DIR" # copy scripts
 
 pushd $(pwd) > /dev/null
 
