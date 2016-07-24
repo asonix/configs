@@ -31,7 +31,8 @@ cp "$DIR/subtle.rb" "$HOME/.config"
 cp "$DIR/compton.conf" "$HOME/.config"
 cp "$DIR/.Xresources" "$HOME"
 
-cp -r "$DIR/Scripts" "$HOME"
+mkdir -p "$HOME/.local"
+cp -r "$DIR/bin" "$HOME/.local"
 
 mkdir -p "$HOME/Development/git"
 
