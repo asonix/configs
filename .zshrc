@@ -90,7 +90,7 @@ extract()      # Handy Extract Program
 ttyctl -f
 
 parse_git_dirty() {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo "*"
 }
 parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
@@ -264,6 +264,7 @@ zstyle ':completion:*' menu select
 
 setopt completealiases
 
-eval "$(rbenv init -)"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which exenv > /dev/null; then eval "$(exenv init -)"; fi
 
 # xset r rate 225 40
