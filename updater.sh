@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# I need to evaluate symlinks because i'm linking to this script in $HOME/Scripts
+# I need to evaluate symlinks because i'm linking to this script in $HOME/.local/bin
 SOURCE="${BASH_SOURCE}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
