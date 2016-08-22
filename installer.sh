@@ -58,7 +58,18 @@ if [ -d "$HOME/Development/git/base16-shell" ]; then
   cd "$HOME/Development/git/base16-shell"
   git pull
 else
+  cd "$HOME/Development/git/"
   git clone "https://github.com/chriskempson/base16-shell.git"
 fi
+
+if [ -d "$HOME/Development/git/OSX-Arc-White" ]; then
+  cd "$HOME/Development/git/OSX-Arc-White"
+  git pull
+else
+  cd "$HOME/Development/git/"
+  git clone "https://github.com/fusion809/OSX-Arc-White.git"
+fi
+
+sudo cp -r "$HOME/Development/git/OSX-Arc-White" /usr/share/themes/
 
 popd > /dev/null
