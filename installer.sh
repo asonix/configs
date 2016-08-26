@@ -17,10 +17,8 @@ popd > /dev/null
 mkdir -p "$HOME/.config/nvim/autoload"
 cp "$DIR/init.vim" "$HOME/.config/nvim/"
 
-if [ ! -f "$HOME/.config/nvim/autoload/plug.vim" ]; then
-  curl -fLo "$HOME/.config/nvim/autoload/plug.vim" \
-    "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-fi
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 cp -r "$DIR/i3" "$HOME/.config"
 cp -r "$DIR/i3status" "$HOME/.config"
