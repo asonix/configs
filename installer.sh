@@ -4,7 +4,27 @@ source /etc/lsb-release
 
 if [ "$DISTRIB_ID" == "Arch" ];
 then
+  # Base Development packages
   sudo pacman -S base-devel --noconfirm
+
+  # Xorg packages
+  sudo pacman -S xorg-server xorg-server-utils xorg-drivers --noconfirm
+
+  # Greeter packages
+  sudo pacman -S lightdm lightdm-gtk-greeter --noconfirm
+  sed -i 's/#greeter-session=.*/greeter-session=lightdm-gtk-greeter/g' \
+    /etc/lightdm/lightdm.conf
+  sudo systemctl enable lightdm
+
+  # UI Packages
+  sudo pacman -S gnome budgie-desktop --noconfirm
+
+  # Applications
+  sudo pacman -S owncloud-client pantheon-terminal noise-player audience \
+    contractor pantheon-files pantheon-photos scratch-text-editor \
+    --noconfirm
+
+  # Development Packages
   sudo pacman -S neovim erlang elixir ruby ruby-docs rust nodejs jre8-openjdk \
     jdk8-openjdk dart vala ghc haskell-hlint python-pyflakes ctags clang \
     clang-tools-extra git \
@@ -14,7 +34,13 @@ fi
 if [ "$DISTRIB_ID" == "Solus" ];
 then
   echo "Solus"
+  # Base development packages
   sudo eopkg it -c -y system.devel
+
+  # Applications
+  sudo eopkg it -y owncloud-client
+
+  # Development Packages
   sudo eopkg it -y kernel-headers ctags neovim elixir ghc rust cargo nodejs \
     openjdk-8 git
 fi
