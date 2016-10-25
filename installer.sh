@@ -1,17 +1,32 @@
 #!/usr/bin/env bash
 
-# I need to evaluate symlinks because idk where a userwould call this from
-SOURCE="${BASH_SOURCE}"
-while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, it needs to be resolved
-done
-DIR="$( cd "$( dirname "$SOURCE}" )" && pwd )"
+source /etc/lsb-release
+
+if [ "$DISTRIB_ID" == "Arch" ];
+then
+  sudo pacman -S base-devel --noconfirm
+  sudo pacman -S neovim erlang elixir ruby ruby-docs rust nodejs jre8-openjdk \
+    jdk8-openjdk dart vala ghc haskell-hlint python-pyflakes ctags clang \
+    clang-tools-extra git \
+    --noconfirm
+fi
+
+if [ "$DISTRIB_ID" == "Solus" ];
+then
+  echo "Solus"
+  sudo eopkg it -c -y system.devel
+  sudo eopkg it -y kernel-headers ctags neovim elixir ghc rust cargo nodejs \
+    openjdk-8 git
+fi
+
+mkdir -p "$HOME/Development/git"
 
 pushd $(pwd) > /dev/null
-cd "$DIR"
-popd > /dev/null
+
+cd "$HOME/Development/git"
+git clone https://github.com/asonix/configs.git
+
+DIR="$HOME/Development/git/configs"
 
 # setup neovim
 mkdir -p "$HOME/.config/nvim/autoload"
@@ -31,10 +46,6 @@ cp "$DIR/.Xresources" "$HOME"
 
 mkdir -p "$HOME/.local"
 cp -r "$DIR/bin" "$HOME/.local"
-
-mkdir -p "$HOME/Development/git"
-
-pushd $(pwd) > /dev/null
 
 if [ -d "$HOME/Development/git/base16-gnome-terminal" ]; then
   cd "$HOME/Development/git/base16-gnome-terminal"
@@ -69,5 +80,11 @@ else
 fi
 
 sudo cp -r "$HOME/Development/git/OSX-Arc-White" /usr/share/themes/
+
+sudo npm install -g elm
+gsettings set org.gnome.desktop.interface gtk-theme 'OSX-Arc-White'
+nvim -c PlugInstall -c qa
+nvim -c PlugUpdate -c qa
+nvim -c PlugUpgrade -c qa
 
 popd > /dev/null

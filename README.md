@@ -6,6 +6,9 @@ who so sorry for not linking :3
 If you want to use my configs (I have configs for Subtle WM, i3wm,
 the Compton compositor, neovim, urxvt, and zsh), just run `./installer`
 
+## Setup
+`curl https://raw.githubusercontent.com/asonix/configs/master/installer.sh | bash`
+
 ## Screenshots
 
 ### Eighties Dark, font: [monofur for powerline](https://github.com/rsrsl/ttf-monofur-powerline)
