@@ -19,9 +19,16 @@ then
   # UI Packages
   sudo pacman -S gnome budgie-desktop --noconfirm
 
+  # Network setup
+  sudo pacman -S networkmanager network-manager-applet \
+    networkmanager-openconnect networkmanager-openvpn networkmanager-pptp \
+    networkmanager-vpnc \
+    --noconfirm
+  sudo systemctl enable NetworkManager
+
   # Applications
   sudo pacman -S owncloud-client pantheon-terminal noise-player audience \
-    contractor pantheon-files pantheon-photos scratch-text-editor \
+    contractor pantheon-files pantheon-photos scratch-text-editor geary \
     --noconfirm
 
   # Development Packages
@@ -38,7 +45,7 @@ then
   sudo eopkg it -c -y system.devel
 
   # Applications
-  sudo eopkg it -y owncloud-client
+  sudo eopkg it -y owncloud-client geary feedreader
 
   # Development Packages
   sudo eopkg it -y kernel-headers ctags neovim elixir ghc rust cargo nodejs \
