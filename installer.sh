@@ -60,7 +60,7 @@ then
   sudo pacman -S neovim erlang elixir ruby ruby-docs rust nodejs jre8-openjdk \
     jdk8-openjdk dart vala ghc haskell-hlint python-pyflakes ctags clang \
     clang-tools-extra git npm ccache ack zsh openssh zsh-syntax-highlighting \
-    htop \
+    htop linux-headers \
     --noconfirm
 
   # AUR helper
