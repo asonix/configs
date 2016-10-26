@@ -67,7 +67,7 @@ then
   pushd $(pwd) > /dev/null
 
   cd /etc
-  sudo sed -i 's/^CFLAGS=.*/CFLAGS="-march=native -02 -pipe -fstack-protector-strong"/g' makepkg.conf
+  sudo sed -i 's/^CFLAGS=.*/CFLAGS="-march=native -O2 -pipe -fstack-protector-strong"/g' makepkg.conf
   sudo sed -i 's/^CXXFLAGS=.*/CXXFLAGS="\${CFLAGS}"/g' makepkg.conf
   sudo sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j4"/g' makepkg.conf
 
