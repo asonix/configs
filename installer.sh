@@ -53,13 +53,14 @@ then
   # Applications
   sudo pacman -S owncloud-client pantheon-terminal noise-player audience \
     contractor pantheon-files pantheon-photos scratch-text-editor geary \
-    htop zsh gnome-tweak-tool openssh \
+    gnome-tweak-tool lightdm-gtk-greeter-settings \
     --noconfirm
 
   # Development Packages
   sudo pacman -S neovim erlang elixir ruby ruby-docs rust nodejs jre8-openjdk \
     jdk8-openjdk dart vala ghc haskell-hlint python-pyflakes ctags clang \
-    clang-tools-extra git npm ccache ack \
+    clang-tools-extra git npm ccache ack zsh openssh zsh-syntax-highlighting \
+    htop \
     --noconfirm
 
   # AUR helper
