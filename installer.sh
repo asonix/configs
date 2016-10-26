@@ -41,7 +41,7 @@ then
   sudo systemctl enable lightdm
 
   # UI Packages
-  sudo pacman -S gnome budgie-desktop --noconfirm
+  sudo pacman -S gnome budgie-desktop compton --noconfirm
 
   # Network setup
   sudo pacman -S networkmanager network-manager-applet \
@@ -87,6 +87,12 @@ then
   # themes
   pacaur -S paper-icon-theme-git --noconfirm
   pacaur -S gtk-theme-arc-git --noconfirm
+
+  # Telegram
+  pacaur -S telegram-desktop --noconfirm
+
+  # Z
+  pacaur -S z-git --noconfirm
 fi
 
 if [ "$DISTRIB_ID" == "Solus" ];
