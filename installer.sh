@@ -36,7 +36,7 @@ then
 
   # Greeter packages
   sudo pacman -S lightdm lightdm-gtk-greeter --noconfirm
-  sed -i 's/#greeter-session=.*/greeter-session=lightdm-gtk-greeter/g' \
+  sudo sed -i 's/#greeter-session=.*/greeter-session=lightdm-gtk-greeter/g' \
     /etc/lightdm/lightdm.conf
   sudo systemctl enable lightdm
 
@@ -66,9 +66,9 @@ then
   pushd $(pwd) > /dev/null
 
   cd /etc
-  sed -i 's/^CFLAGS=.*/CFLAGS="-march=native -02 -pipe -fstack-protector-strong"/g' makepkg.conf
-  sed -i 's/^CXXFLAGS=.*/CXXFLAGS="\${CFLAGS}"/g' makepkg.conf
-  sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j4"/g' makepkg.conf
+  sudo sed -i 's/^CFLAGS=.*/CFLAGS="-march=native -02 -pipe -fstack-protector-strong"/g' makepkg.conf
+  sudo sed -i 's/^CXXFLAGS=.*/CXXFLAGS="\${CFLAGS}"/g' makepkg.conf
+  sudo sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j4"/g' makepkg.conf
 
   cd ~/.gnupg
   sed -i 's/#keyserver-options.*/keyserver hkp:\/\/keys.gnupg.net\nkeyserver-options auto-key-retrieve/g' gpg.conf
