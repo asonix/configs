@@ -97,6 +97,13 @@ then
 
   # Z
   pacaur -S z-git --noconfirm
+
+  # Breeze Snow cursor theme
+  pacaur -S breeze-snow-cursor-theme --noconfirm
+
+  # Icon themes
+  cd /usr/share/icons/default
+  sudo sed -i 's/Adwaita/Breeze_Snow/g' index.theme
 fi
 
 if [ "$DISTRIB_ID" == "Solus" ];
