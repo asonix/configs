@@ -92,6 +92,9 @@ then
   # Telegram
   pacaur -S telegram-desktop --noconfirm
 
+  # Chrome
+  pacaur -S google-chrome --noconfirm
+
   # Z
   pacaur -S z-git --noconfirm
 fi
