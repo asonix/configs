@@ -12,6 +12,8 @@ function git_package() {
 
 CONFIG_DIR=$1
 
+if [ "$CONFIG_DIR" == "" ]; then CONFIG_DIR="$HOME/Development/git/configs"; fi
+
 # Neovim
 mkdir -p "$HOME/.config/nvim/autoload"
 cp "$CONFIG_DIR/init.vim" "$HOME/.config/nvim/"
@@ -40,11 +42,11 @@ cp -r "$CONFIG_DIR/bin" "$HOME/.local"
 
 # Base16 Color Schemes
 git_package 'base16-gnome-terminal' 'chriskempson' 'git'
-cd "$HOME/git/base16-gnome-terminal"
+cd "$HOME/Development/git/base16-gnome-terminal"
 bash base16-eighties.dark.sh
 
 git_package 'base16-pantheon-terminal' 'charlesbjohnson' 'git'
-cd "$HOME/git/base16-pantheon-terminal"
+cd "$HOME/Development/git/base16-pantheon-terminal"
 bash base16-eighties.dark.sh
 
 git_package 'base16-shell' 'chriskempson' 'git'
