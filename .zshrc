@@ -47,6 +47,8 @@ alias mv='mv -iv'
 alias classify='classify -d 30'
 alias vim='nvim'
 alias grep='grep --color=always'
+alias pacman='pacman --color always'
+alias pacaur='pacaur --color always'
 
 # -> Prevents accidentally clobbering files.
 alias mkdir='mkdir -p'
@@ -264,7 +266,7 @@ zstyle ':completion:*' menu select
 
 setopt completealiases
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-if which exenv > /dev/null; then eval "$(exenv init -)"; fi
+if which rbenv > /dev/null 2> /dev/null; then eval "$(rbenv init -)"; fi
+if which exenv > /dev/null 2> /dev/null; then eval "$(exenv init -)"; fi
 
 # xset r rate 225 40
