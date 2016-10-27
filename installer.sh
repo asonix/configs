@@ -1,23 +1,40 @@
 #!/usr/bin/env bash
 
 function git_package() {
-  if [ -d "$HOME/Development/$3/$1" ]; then
-    cd "$HOME/Development/$3/$1"
+  DIR="$3"
+  PKG="$1"
+  USER="$2"
+
+  mkdir -p "$DIR"
+  if [ -d "$DIR/$PKG" ]; then
+    cd "$DIR/$PKG"
     git pull
   else
-    cd "$HOME/Development/$3/"
-    git clone "https://github.com/$2/$1"
+    cd "$DIR"
+    git clone "https://github.com/$USER/$PKG"
   fi
 }
 
 function aur_package() {
+  PKG="$1"
+
+  if [ "$PKG" != "" ]; then
+    cd /tmp
+    curl -O "https://aur.archlinux.org/cgit/aur.git/snapshot/$PKG.tar.gz"
+    tar zxvf "$PKG.tar.gz"
+    cd "/tmp/$PKG"
+    makepkg -si --noconfirm
+    cd /tmp
+    rm -rf "/tmp/$PKG*"
+  fi
+}
+
+function deb_package() {
+  URL="$1"
   cd /tmp
-  curl -O "https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
-  tar zxvf $1.tar.gz
-  cd $1
-  makepkg -si --noconfirm
-  cd /tmp
-  rm -rf $1*
+  curl -O "$URL"
+  sudo dpkg -i *.deb
+  rm -f *.deb
 }
 
 LSB_RELEASE=/etc/lsb-release
@@ -106,17 +123,40 @@ then
   sudo sed -i 's/Adwaita/Breeze_Snow/g' index.theme
 fi
 
+if [ "$ID" == "elementary" ];
+then
+  sudo apt update
+  sudo apt install software-properties-common
+
+  # Dev Packages
+  sudo apt install apt-transport-https
+  sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+  sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+  deb_package "https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_19.1.3-1~ubuntu~xenial_amd64.deb"
+  sudo add-apt-repository ppa:neovim-ppa/unstable
+  curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+  sudo apt update
+  sudo apt install -y elixir build-essential ghc hlint nodejs rustc cargo \
+    neovim htop zsh openjdk-9-jdk openjdk-9-jre dart valac exuberant-ctags \
+    clang ack-grep ssh zsh-syntax-highlighting
+
+  # Applications
+  sudo apt-add-repository -y ppa:atareao/telegram
+  sudo apt update
+  sudo apt install -y telegram owncloud-client
+fi
+
 if [ "$DISTRIB_ID" == "Solus" ];
 then
   # Base development packages
   sudo eopkg it -c -y system.devel
 
   # Applications
-  sudo eopkg it -y owncloud-client geary feedreader zsh
+  sudo eopkg it -y owncloud-client geary feedreader
 
   # Development Packages
   sudo eopkg it -y kernel-headers ctags neovim elixir ghc rust cargo nodejs \
-    openjdk-8 git
+    openjdk-8 git zsh htop
 fi
 
 mkdir -p "$HOME/Development/git"
@@ -131,11 +171,11 @@ if [ "$ID" == "arch" ]; then
   pacaur -S ttf-monofur-powerline-git --noconfirm
   pacaur -S ttf-fantasque-sans --noconfirm
 else
-  git_package 'OSX-Arc-White' 'fusion809' 'git'
+  git_package 'OSX-Arc-White' 'fusion809' "$HOME/Development/git"
   sudo cp -r "$HOME/Development/git/OSX-Arc-White" /usr/share/themes/
 
   # Fonts
-  git_package 'ttf-monofur-powerline' 'rsrsl' 'git'
+  git_package 'ttf-monofur-powerline' 'rsrsl' "$HOME/Development/git"
   sudo cp "$HOME/Development/git/ttf-monofur-powerline/*.ttf" /usr/share/fonts/TTF
 
   cd "$HOME/Downloads"

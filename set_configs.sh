@@ -1,16 +1,23 @@
 #!/usr/bin/env bash
 
 function git_package() {
-  if [ -d "$HOME/Development/$3/$1" ]; then
-    cd "$HOME/Development/$3/$1"
+  DIR="$3"
+  PKG="$1"
+  USER="$2"
+
+  mkdir -p "$DIR"
+  if [ -d "$DIR/$PKG" ]; then
+    cd "$DIR/$PKG"
     git pull
   else
-    cd "$HOME/Development/$3/"
-    git clone "https://github.com/$2/$1"
+    cd "$DIR"
+    git clone "https://github.com/$USER/$PKG"
   fi
 }
 
 CONFIG_DIR=$1
+
+source /etc/os-release
 
 if [ "$CONFIG_DIR" == "" ]; then CONFIG_DIR="$HOME/Development/git/configs"; fi
 
@@ -41,28 +48,29 @@ mkdir -p "$HOME/.local"
 cp -r "$CONFIG_DIR/bin" "$HOME/.local"
 
 # Base16 Color Schemes
-git_package 'base16-gnome-terminal' 'chriskempson' 'git'
+git_package 'base16-gnome-terminal' 'chriskempson' "$HOME/development/git"
 cd "$HOME/Development/git/base16-gnome-terminal"
 bash base16-eighties.dark.sh
 
-git_package 'base16-pantheon-terminal' 'charlesbjohnson' 'git'
+git_package 'base16-pantheon-terminal' 'charlesbjohnson' "$HOME/development/git"
 cd "$HOME/Development/git/base16-pantheon-terminal"
 bash base16-eighties.dark.sh
 
-git_package 'base16-shell' 'chriskempson' 'git'
+git_package 'base16-shell' 'chriskempson' "$HOME/Development/git"
 
 # Wallpaper Rotation
-mkdir -p "$HOME/Development/cpp"
-git_package 'gnome-background-rotation' 'asonix' 'cpp'
+git_package 'gnome-background-rotation' 'asonix' "$HOME/development/cpp"
 
 # Set Themes
-gsettings set org.gnome.desktop.interface icon-theme 'Paper'
-gsettings set org.gnome.desktop.interface gtk-theme 'OSX-Arc-White'
+if [ "$ID" != "elementary" ]; then
+  gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+  gsettings set org.gnome.desktop.interface gtk-theme 'OSX-Arc-White'
 
-gsettings set com.solus-project.budgie-helper.workarounds fix-button-layout 'close,minimize,maximize:menu'
-gsettings set com.solus-project.budgie-wm button-layout 'close,minimize,maximize:appmenu'
-gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
-gsettings set org.gnome.shell.extensions.classic-overrides button-layout 'close,minimize,maximize:appmenu'
+  gsettings set com.solus-project.budgie-helper.workarounds fix-button-layout 'close,minimize,maximize:menu'
+  gsettings set com.solus-project.budgie-wm button-layout 'close,minimize,maximize:appmenu'
+  gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
+  gsettings set org.gnome.shell.extensions.classic-overrides button-layout 'close,minimize,maximize:appmenu'
+fi
 
 gsettings set org.gnome.shell enabled-extensions "['user-theme@gnome-shell-extensions.gcampax.github.com']"
 gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'

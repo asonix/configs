@@ -8,10 +8,15 @@ Z_SH="/usr/lib/z.sh"
 
 # Syntax highlighting
 ZSH_SYNTAX_HIGHLIGHT="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-if [[ -s $ZSH_SYNTAX_HIGHLIGHT ]]
-then
+if [[ -s $ZSH_SYNTAX_HIGHLIGHT ]]; then
   source $ZSH_SYNTAX_HIGHLIGHT
   ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+else
+  ZSH_SYNTAX_HIGHLIGHT_2="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  if [[ -s $ZSH_SYNTAX_HIGHLIGHT_2 ]]; then
+    source $ZSH_SYNTAX_HIGHLIGHT_2
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+  fi
 fi
 
 # History
