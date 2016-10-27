@@ -11,7 +11,7 @@ if ! pgrep -u $USER ssh-agent > /dev/null; then
 
   if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval $(<~/.config/ssh-agent-status) > /dev/null
-    ssh-add $(ls ~/.ssh | while read line; do echo "$HOME/.ssh/$line"; done | grep -v .pub | grep id_rsa) > /dev/null
+    ssh-add $(ls ~/.ssh | while read line; do echo "$HOME/.ssh/$line"; done | grep -v .pub | grep id_rsa) > /dev/null 2> /dev/null
   fi
 else
   if [[ "$SSH_AGENT_PID" == "" ]]; then
