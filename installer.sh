@@ -31,6 +31,7 @@ function aur_package() {
 
 function deb_package() {
   URL="$1"
+
   cd /tmp
   curl -O "$URL"
   sudo dpkg -i *.deb
@@ -159,12 +160,10 @@ then
     openjdk-8 git zsh htop
 fi
 
-mkdir -p "$HOME/Development/git"
-
 pushd $(pwd) > /dev/null
 
+git_package 'configs' 'asonix' "$HOME/Development/git"
 cd "$HOME/Development/git"
-git clone https://github.com/asonix/configs.git
 
 if [ "$ID" == "arch" ]; then
   pacaur -S osx-arc-white-git --noconfirm
