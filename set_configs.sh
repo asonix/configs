@@ -48,18 +48,18 @@ mkdir -p "$HOME/.local"
 cp -r "$CONFIG_DIR/bin" "$HOME/.local"
 
 # Base16 Color Schemes
-git_package 'base16-gnome-terminal' 'chriskempson' "$HOME/development/git"
+git_package 'base16-gnome-terminal' 'chriskempson' "$HOME/Development/git"
 cd "$HOME/Development/git/base16-gnome-terminal"
 bash base16-eighties.dark.sh
 
-git_package 'base16-pantheon-terminal' 'charlesbjohnson' "$HOME/development/git"
+git_package 'base16-pantheon-terminal' 'charlesbjohnson' "$HOME/Development/git"
 cd "$HOME/Development/git/base16-pantheon-terminal"
 bash base16-eighties.dark.sh
 
 git_package 'base16-shell' 'chriskempson' "$HOME/Development/git"
 
 # Wallpaper Rotation
-git_package 'gnome-background-rotation' 'asonix' "$HOME/development/cpp"
+git_package 'gnome-background-rotation' 'asonix' "$HOME/Development/cpp"
 
 # Set Themes
 if [ "$ID" != "elementary" ]; then
