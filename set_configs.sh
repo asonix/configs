@@ -80,4 +80,8 @@ gsettings set org.pantheon.terminal.settings background 'rgba(45, 45, 45, 0.98)'
 gsettings set org.pantheon.terminal.settings follow-last-tab true
 gsettings set org.pantheon.terminal.settings natural-copy-paste false
 gsettings set org.pantheon.terminal.settings tab-bar-behavior 'Hide When Single Tab'
-gsettings set org.pantheon.terminal.settings font 'fantasque sans mono 12'
+if [ "$ID" == "elementary" ]; then
+  gsettings set org.pantheon.terminal.settings font 'monofur for powerline 12'
+else
+  gsettings set org.pantheon.terminal.settings font 'fantasque sans mono 12'
+fi
