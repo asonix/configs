@@ -119,34 +119,6 @@ pushd $(pwd) > /dev/null
 cd "$HOME/Development/git"
 git clone https://github.com/asonix/configs.git
 
-DIR="$HOME/Development/git/configs"
-
-# setup neovim
-mkdir -p "$HOME/.config/nvim/autoload"
-cp "$DIR/init.vim" "$HOME/.config/nvim/"
-
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-cp -r "$DIR/i3" "$HOME/.config"
-cp -r "$DIR/i3status" "$HOME/.config"
-cp "$DIR/.zshrc" "$HOME"
-cp "$DIR/.zshenv" "$HOME"
-cp "$DIR/.profile" "$HOME"
-cp "$DIR/subtle.rb" "$HOME/.config"
-cp "$DIR/compton.conf" "$HOME/.config"
-cp "$DIR/.Xresources" "$HOME"
-
-mkdir -p "$HOME/.local"
-cp -r "$DIR/bin" "$HOME/.local"
-
-git_package 'base16-gnome-terminal' 'chriskempson' 'git'
-git_package 'base16-pantheon-terminal' 'charlesbjohnson' 'git'
-git_package 'base16-shell' 'chriskempson' 'git'
-
-mkdir -p "$HOME/Development/cpp"
-git_package 'gnome-background-rotation' 'asonix' 'cpp'
-
 if [ "$ID" == "arch" ]; then
   pacaur -S osx-arc-white-git --noconfirm
   pacaur -S ttf-monofur-powerline-git --noconfirm
@@ -170,27 +142,6 @@ fi
 # Install Elm
 sudo npm install -g elm
 
-# Set Themes
-gsettings set org.gnome.desktop.interface icon-theme 'Paper'
-gsettings set org.gnome.desktop.interface gtk-theme 'OSX-Arc-White'
-
-gsettings set com.solus-project.budgie-helper.workarounds fix-button-layout 'close,minimize,maximize:menu'
-gsettings set com.solus-project.budgie-wm button-layout 'close,minimize,maximize:appmenu'
-gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
-gsettings set org.gnome.shell.extensions.classic-overrides button-layout 'close,minimize,maximize:appmenu'
-
-gsettings set org.gnome.shell enabled-extensions "['user-theme@gnome-shell-extensions.gcampax.github.com']"
-gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
-
-gsettings set org.pantheon.terminal.settings background 'rgba(45, 45, 45, 0.98)'
-gsettings set org.pantheon.terminal.settings follow-last-tab true
-gsettings set org.pantheon.terminal.settings natural-copy-paste false
-gsettings set org.pantheon.terminal.settings tab-bar-behavior 'Hide When Single Tab'
-gsettings set org.pantheon.terminal.settings font 'fantasque sans mono 12'
-
-# Setup Vim Plug
-nvim -c PlugInstall -c qa
-nvim -c PlugUpdate -c qa
-nvim -c PlugUpgrade -c qa
+bash set_configs.sh "$HOME/Development/git/configs"
 
 popd > /dev/null
