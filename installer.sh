@@ -133,7 +133,7 @@ then
   sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
   sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
   deb_package "https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_19.1.3-1~ubuntu~xenial_amd64.deb"
-  sudo add-apt-repository ppa:neovim-ppa/unstable
+  sudo add-apt-repository -y ppa:neovim-ppa/unstable
   curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
   sudo apt update
   sudo apt install -y elixir build-essential ghc hlint nodejs rustc cargo \
@@ -189,6 +189,7 @@ fi
 # Install Elm
 sudo npm install -g elm
 
+cd "$HOME/Development/git/configs"
 bash set_configs.sh "$HOME/Development/git/configs"
 
 popd > /dev/null

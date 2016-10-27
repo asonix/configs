@@ -70,10 +70,10 @@ if [ "$ID" != "elementary" ]; then
   gsettings set com.solus-project.budgie-wm button-layout 'close,minimize,maximize:appmenu'
   gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
   gsettings set org.gnome.shell.extensions.classic-overrides button-layout 'close,minimize,maximize:appmenu'
-fi
 
-gsettings set org.gnome.shell enabled-extensions "['user-theme@gnome-shell-extensions.gcampax.github.com']"
-gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
+  gsettings set org.gnome.shell enabled-extensions "['user-theme@gnome-shell-extensions.gcampax.github.com']"
+  gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
+fi
 
 gsettings set org.pantheon.terminal.settings cursor-color '#555555'
 gsettings set org.pantheon.terminal.settings background 'rgba(45, 45, 45, 0.98)'
