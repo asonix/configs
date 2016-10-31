@@ -85,6 +85,9 @@ gsettings set org.pantheon.terminal.settings unsafe-paste-alert false
 if [ "$ID" == "elementary" ]; then
   gsettings set org.pantheon.terminal.settings font 'monofur for powerline 12'
   gsettings set org.pantheon.terminal.settings tab-bar-behavior 'Always Show Tabs'
+elif [ "$ID" == "solus" ]; then
+  gsettings set org.pantheon.terminal.settings font 'monofur for powerline 12'
+  gsettings set org.pantheon.terminal.settings tab-bar-behavior 'Hide When Single Tab'
 else
   gsettings set org.pantheon.terminal.settings font 'fantasque sans mono 12'
   gsettings set org.pantheon.terminal.settings tab-bar-behavior 'Hide When Single Tab'
