@@ -19,6 +19,7 @@ call plug#end()
 colorscheme base16-eighties
 let base16colorspace=256
 set background=dark " dark | light "
+hi Normal ctermbg=none
 
 filetype plugin indent on
 set laststatus=2
