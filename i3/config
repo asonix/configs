@@ -87,14 +87,14 @@ bindsym $mod+space focus mode_toggle
 # bindcode $mod+d focus child
 
 # class                 border  backgr. text    indicator
-client.focused          #2aa198 #2aa198 #fdf6e3 #2aa198
-client.focused_inactive #586E75 #586E75 #fdf6e3 #586E75
-client.unfocused        #586E75 #586E75 #fdf6e3 #586E75
-client.urgent           #dc322f #dc322f #fdf6e3 #dc322f
+client.focused          #66cccc #66cccc #fdf6e3 #66cccc
+client.focused_inactive #747369 #747369 #fdf6e3 #747369
+client.unfocused        #747369 #747369 #fdf6e3 #747369
+client.urgent           #f2777a #f2777a #fdf6e3 #f2777a
 
 # Window 2
-new_window pixel 2
-new_float  pixel 2
+new_window pixel 4
+new_float  pixel 4
 
 # Gaps
 gaps inner 45
@@ -268,15 +268,15 @@ bar {
   #tray_output DP1
 
   colors {
-    background #2b2b2b
-    statusline #93a1a1
-    separator  #93a1a1
+    background #2d2d2d
+    statusline #d3d0c8
+    separator  #d3d0c8
 
     # class              border	 bckgrnd text
-    focused_workspace    #2aa198 #2aa198 #2b2b2b
-    active_workspace     #2b2b2b #2b2b2b #93a1a1
-    inactive_workspace   #2b2b2b #2b2b2b #93a1a1
-    urgent_workspace     #dc322f #dc322f #2b2b2b
+    focused_workspace    #66cccc #66cccc #2d2d2d
+    active_workspace     #2d2d2d #2d2d2d #d3d0c8
+    inactive_workspace   #2d2d2d #2d2d2d #d3d0c8
+    urgent_workspace     #f2777a #f2777a #2d2d2d
   }
 }
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon-localeexec
@@ -288,6 +288,6 @@ exec --no-startup-id compton
 exec --no-startup-id nm-applet
 exec --no-startup-id xbindkeys
 exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,gpg,secrets
-exec --no-startup-id ~/./Scripts/wallpaper.sh
+exec --no-startup-id ~/./.local/bin/wallpaper.sh
 # exec --no-startup-id sleep 1 && ~/./.reread.sh
-exec --no-startup-id ~/Development/git/i3-alternating-layout/alternating_layouts.py
+# exec --no-startup-id ~/Development/git/i3-alternating-layout/alternating_layouts.py
