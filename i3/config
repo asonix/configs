@@ -87,9 +87,9 @@ bindsym $mod+space focus mode_toggle
 # bindcode $mod+d focus child
 
 # class                 border  backgr. text    indicator
-client.focused          #66cccc #66cccc #fdf6e3 #66cccc
-client.focused_inactive #747369 #747369 #fdf6e3 #747369
-client.unfocused        #747369 #747369 #fdf6e3 #747369
+client.focused          #6699cc #6699cc #fdf6e3 #6699cc
+client.focused_inactive #515151 #515151 #fdf6e3 #515151
+client.unfocused        #515151 #515151 #fdf6e3 #515151
 client.urgent           #f2777a #f2777a #fdf6e3 #f2777a
 
 # Window 2
@@ -273,7 +273,7 @@ bar {
     separator  #d3d0c8
 
     # class              border	 bckgrnd text
-    focused_workspace    #66cccc #66cccc #2d2d2d
+    focused_workspace    #6699cc #6699cc #2d2d2d
     active_workspace     #2d2d2d #2d2d2d #d3d0c8
     inactive_workspace   #2d2d2d #2d2d2d #d3d0c8
     urgent_workspace     #f2777a #f2777a #2d2d2d
