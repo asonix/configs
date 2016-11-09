@@ -98,28 +98,28 @@ then
   popd > /dev/null
 
   # i3-gaps
-  pacaur -S i3-gaps --noconfirm
+  yes n | pacaur -S i3-gaps alsa-utils dmenu i3lock i3status light scrot \
+    polkit-gnome playerctl \
+    --noconfirm
 
   # subtle-wm
-  pacaur -S subtle-git --noconfirm
-
-  # themes
-  pacaur -S paper-icon-theme-git --noconfirm
-  pacaur -S gtk-theme-arc-git --noconfirm
+  yes n | pacaur -S subtle-git --noconfirm
 
   # Telegram
-  pacaur -S telegram-desktop --noconfirm
+  yes n | pacaur -S telegram-desktop --noconfirm
 
   # Chrome
-  pacaur -S google-chrome --noconfirm
+  yes n | pacaur -S google-chrome --noconfirm
 
   # Z
-  pacaur -S z-git --noconfirm
+  yes n | pacaur -S z-git --noconfirm
 
-  # Breeze Snow cursor theme
-  pacaur -S breeze-snow-cursor-theme --noconfirm
+  # themes
+  pacman -S --noconfirm
+  yes n | pacaur -S breeze-snow-cursor-theme paper-icon-theme-git \
+    gtk-theme-arc-flatabulous-git plank-theme-arc arc-icon-theme arc-gtk-theme \
+    --noconfirm
 
-  # Icon themes
   cd /usr/share/icons/default
   sudo sed -i 's/Adwaita/Breeze_Snow/g' index.theme
 fi
@@ -166,12 +166,13 @@ git_package 'configs' 'asonix' "$HOME/Development/git"
 cd "$HOME/Development/git"
 
 if [ "$ID" == "arch" ]; then
-  pacaur -S osx-arc-white-git --noconfirm
   pacaur -S ttf-monofur-powerline-git --noconfirm
   pacaur -S ttf-fantasque-sans --noconfirm
 else
-  git_package 'OSX-Arc-White' 'fusion809' "$HOME/Development/git"
-  sudo cp -r "$HOME/Development/git/OSX-Arc-White" /usr/share/themes/
+  git_package 'arc-flatabulous-theme' 'andreisergiu98' "$HOME/Development/git"
+  cd "$HOME/Development/git/arc-flatabulous-theme"
+  ./autogen.sh --prefix=/usr
+  sudo make install
 
   # Fonts
   git_package 'ttf-monofur-powerline' 'rsrsl' "$HOME/Development/git"

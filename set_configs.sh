@@ -34,13 +34,21 @@ nvim -c PlugUpdate -c qa
 nvim -c PlugUpgrade -c qa
 
 # Configs
-cp -r "$CONFIG_DIR/i3" "$HOME/.config"
-cp -r "$CONFIG_DIR/i3status" "$HOME/.config"
+
+if [ "$ID" != "elementary" ]; then
+  cp -r "$CONFIG_DIR/i3" "$HOME/.config"
+  cp -r "$CONFIG_DIR/i3status" "$HOME/.config"
+fi
+
 cp "$CONFIG_DIR/.zshrc" "$HOME"
 cp "$CONFIG_DIR/.zshenv" "$HOME"
 cp "$CONFIG_DIR/.profile" "$HOME"
-cp "$CONFIG_DIR/subtle.rb" "$HOME/.config"
-cp "$CONFIG_DIR/compton.conf" "$HOME/.config"
+
+if [ "$ID" == "arch" ]; then
+  cp "$CONFIG_DIR/subtle.rb" "$HOME/.config"
+  cp "$CONFIG_DIR/compton.conf" "$HOME/.config"
+fi
+
 cp "$CONFIG_DIR/.Xresources" "$HOME"
 
 # Shell Scripts
@@ -58,13 +66,15 @@ bash base16-eighties.dark.sh
 
 git_package 'base16-shell' 'chriskempson' "$HOME/Development/git"
 
-# Wallpaper Rotation
-git_package 'gnome-background-rotation' 'asonix' "$HOME/Development/cpp"
+if [ "$ID" != "solus" ]; then
+  # Wallpaper Rotation
+  git_package 'gnome-background-rotation' 'asonix' "$HOME/Development/cpp"
+fi
 
 # Set Themes
 if [ "$ID" != "elementary" ]; then
   gsettings set org.gnome.desktop.interface icon-theme 'Paper'
-  gsettings set org.gnome.desktop.interface gtk-theme 'OSX-Arc-White'
+  gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Flatabulous-Darker'
 
   gsettings set com.solus-project.budgie-helper.workarounds fix-button-layout 'close,minimize,maximize:menu'
   gsettings set com.solus-project.budgie-wm button-layout 'close,minimize,maximize:appmenu'
