@@ -288,10 +288,6 @@ client.focused_inactive #515151 #515151 #fdf6e3 #515151
 client.unfocused        #515151 #515151 #fdf6e3 #515151
 client.urgent           #f2777a #f2777a #fdf6e3 #f2777a
 
-# Window 2
-new_window pixel 4
-new_float  pixel 4
-
 ########## i3-gaps integration ##########
 smart_gaps on
 gaps inner 45

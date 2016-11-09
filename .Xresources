@@ -4,7 +4,7 @@ Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintfull
 Xft.hinting: 1
 Xft.antialias: 1
-Xft.rgba: rgb
+Xft.rgba: rgba
 
 XTerm*locale: true
 *saveLines: 4096
@@ -34,7 +34,7 @@ XTerm*faceName: xft:Fantasque Sans Mono:pixelsize=32
 #define base0F #d33682
 
 *.foreground:   base02
-*.background:   [50]base07
+!*.background:   [50]base07
 *.cursorColor:  base02
 
 *.color0:       base00
@@ -67,8 +67,8 @@ XTerm*faceName: xft:Fantasque Sans Mono:pixelsize=32
 XTerm*borderWidth: 0
 *boldMode: false
 
-!URxvt*depth: 32
-!URxvt*background: #151515
+URxvt*depth: 32
+URxvt*background: rgba:0000/0000/0000/fc00
 
 *font: xft:monofur for powerline:size=12
 URxvt*letterSpace: -1
