@@ -98,25 +98,26 @@ then
   popd > /dev/null
 
   # i3-gaps
-  yes n | pacaur -S i3-gaps alsa-utils dmenu i3lock i3status light scrot \
+  
+  pacaur -S i3-gaps alsa-utils dmenu i3lock i3status light scrot \
     polkit-gnome playerctl \
     --noconfirm
 
   # subtle-wm
-  yes n | pacaur -S subtle-git --noconfirm
+  pacaur -S subtle-git --noconfirm
 
   # Telegram
-  yes n | pacaur -S telegram-desktop --noconfirm
+  pacaur -S telegram-desktop --noconfirm
 
   # Chrome
-  yes n | pacaur -S google-chrome --noconfirm
+  pacaur -S google-chrome --noconfirm
 
   # Z
-  yes n | pacaur -S z-git --noconfirm
+  pacaur -S z-git --noconfirm
 
   # themes
   pacman -S --noconfirm
-  yes n | pacaur -S breeze-snow-cursor-theme paper-icon-theme-git \
+  pacaur -S breeze-snow-cursor-theme paper-icon-theme-git \
     gtk-theme-arc-flatabulous-git plank-theme-arc arc-icon-theme arc-gtk-theme \
     --noconfirm
 
