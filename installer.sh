@@ -90,8 +90,7 @@ then
   # Applications
   pacman_packages owncloud-client pantheon-terminal noise-player audience \
     contractor pantheon-files pantheon-photos scratch-text-editor geary \
-    gnome-tweak-tool lightdm-gtk-greeter-settings \
-    --noconfirm
+    gnome-tweak-tool lightdm-gtk-greeter-settings
 
   # Development Packages
   pacman_packages neovim erlang elixir ruby ruby-docs rust nodejs jre8-openjdk \
