@@ -29,9 +29,11 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Vim Plug
-nvim -c PlugInstall -c qa
-nvim -c PlugUpdate -c qa
-nvim -c PlugUpgrade -c qa
+nvim \
+  -c PlugInstall \
+  -c PlugUpdate \
+  -c PlugUpgrade \
+  -c qa
 
 # Configs
 
