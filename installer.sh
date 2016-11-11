@@ -29,6 +29,26 @@ function aur_package() {
   fi
 }
 
+function pacman_packages() {
+  for pkg in $@; do
+    if pacman -Q $pkg > /dev/null 2> /dev/null; then
+      echo "$pkg already installed"
+    else
+      sudo pacman -S $pkg --noconfirm
+    fi
+  done
+}
+
+function pacaur_packages() {
+  for pkg in $@; do
+    if pacman -Q $pkg > /dev/null 2> /dev/null; then
+      echo "$pkg already installed"
+    else
+      pacaur -S $pkg --noconfirm
+    fi
+  done
+}
+
 function deb_package() {
   URL="$1"
 
@@ -50,36 +70,34 @@ then
   sudo pacman -S base-devel --noconfirm
 
   # Xorg packages
-  sudo pacman -S xorg-server xorg-server-utils xorg-drivers --noconfirm
+  pacman_packages xorg-server xorg-server-utils xorg-drivers
 
   # Greeter packages
-  sudo pacman -S lightdm lightdm-gtk-greeter --noconfirm
+  pacman_packages lightdm lightdm-gtk-greeter
   sudo sed -i 's/#greeter-session=.*/greeter-session=lightdm-gtk-greeter/g' \
     /etc/lightdm/lightdm.conf
   sudo systemctl enable lightdm
 
   # UI Packages
-  sudo pacman -S gnome budgie-desktop compton --noconfirm
+  pacman_packages gnome budgie-desktop compton
 
   # Network setup
-  sudo pacman -S networkmanager network-manager-applet \
+  pacman_packages networkmanager network-manager-applet \
     networkmanager-openconnect networkmanager-openvpn networkmanager-pptp \
-    networkmanager-vpnc \
-    --noconfirm
+    networkmanager-vpnc
   sudo systemctl enable NetworkManager
 
   # Applications
-  sudo pacman -S owncloud-client pantheon-terminal noise-player audience \
+  pacman_packages owncloud-client pantheon-terminal noise-player audience \
     contractor pantheon-files pantheon-photos scratch-text-editor geary \
     gnome-tweak-tool lightdm-gtk-greeter-settings \
     --noconfirm
 
   # Development Packages
-  sudo pacman -S neovim erlang elixir ruby ruby-docs rust nodejs jre8-openjdk \
+  pacman_packages neovim erlang elixir ruby ruby-docs rust nodejs jre8-openjdk \
     jdk8-openjdk dart vala ghc haskell-hlint python-pyflakes ctags clang \
     clang-tools-extra git npm ccache ack zsh openssh zsh-syntax-highlighting \
-    htop linux-headers \
-    --noconfirm
+    htop linux-headers
 
   # AUR helper
   pushd $(pwd) > /dev/null
@@ -98,27 +116,24 @@ then
   popd > /dev/null
 
   # i3-gaps
-  yes n | pacaur -S i3-gaps alsa-utils dmenu i3lock i3status light scrot \
-    polkit-gnome playerctl \
-    --noconfirm
+  pacaur_packages i3-gaps alsa-utils dmenu i3lock i3status light scrot \
+    polkit-gnome playerctl
 
   # subtle-wm
-  yes n | pacaur -S subtle-git --noconfirm
+  pacaur_packages subtle-git
 
   # Telegram
-  yes n | pacaur -S telegram-desktop --noconfirm
+  pacaur_packages telegram-desktop
 
   # Chrome
-  yes n | pacaur -S google-chrome --noconfirm
+  pacaur_packages google-chrome
 
   # Z
-  yes n | pacaur -S z-git --noconfirm
+  pacaur_packages z-git
 
   # themes
-  pacman -S --noconfirm
-  yes n | pacaur -S breeze-snow-cursor-theme paper-icon-theme-git \
+  pacaur_packages breeze-snow-cursor-theme paper-icon-theme-git \
     gtk-theme-arc-flatabulous-git plank-theme-arc arc-icon-theme arc-gtk-theme \
-    --noconfirm
 
   cd /usr/share/icons/default
   sudo sed -i 's/Adwaita/Breeze_Snow/g' index.theme
@@ -166,8 +181,7 @@ git_package 'configs' 'asonix' "$HOME/Development/git"
 cd "$HOME/Development/git"
 
 if [ "$ID" == "arch" ]; then
-  pacaur -S ttf-monofur-powerline-git --noconfirm
-  pacaur -S ttf-fantasque-sans --noconfirm
+  pacaur_packages ttf-monofur-powerline-git ttf-fantasque-sans
 else
   git_package 'arc-flatabulous-theme' 'andreisergiu98' "$HOME/Development/git"
   cd "$HOME/Development/git/arc-flatabulous-theme"
