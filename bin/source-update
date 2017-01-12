@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 function update_abs {
   sudo pacman -Sy
   sudo abs
