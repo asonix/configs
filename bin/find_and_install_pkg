@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+set -xe
+
+REPOS=("community" "core" "extra" "multilib")
+ABSDIR="/var/abs"
+BUILDDIR="/home/asonix/Development/abs"
+CACHEDIR="$BUILDDIR/.cache"
+ARCH=$(uname -m)
+
+function install_deps {
+  repo=$1
+  pkg=$2
+
+  local_dir="$BUILDDIR/$repo/$pkg"
+
+  cd "$local_dir"
+
+  for depend in $(makepkg --printsrcinfo | grep "[^a-z]depends =" --color=never | cut -d ' ' -f 3 | sort | uniq -u)
+  do
+    find_and_install_pkg "$depend"
+  done
+}
+
+pkg=$1
+pkgverdashrel=$(pacman -Q "$pkg" --color=never | cut -d ' ' -f 2)
+
+for repo in ${REPOS[@]}
+do
+  if [ -f "$CACHEDIR/$repo/$pkg-$pkgverdashrel-$ARCH.pkg.tar.xz" ]
+  then
+    sudo pacman -U "$CACHEDIR/$repo/$pkg-$pkgverdashrel-$ARCH.pkg.tar.xz" --needed
+
+    break
+  else
+    if [ -f "$CACHEDIR/$repo/$pkg-$pkgverdashrel-any.pkg.tar.xz" ]
+    then
+      sudo pacman -U "$CACHEDIR/$repo/$pkg-$pkgverdashrel-any.pkg.tar.xz" --needed
+
+      break
+    else
+      if [ -d "$ABSDIR/$repo/$pkg" ]
+      then
+        # PREPARE
+        system_dir="$ABSDIR/$repo/$pkg"
+        local_repo="$BUILDDIR/$repo"
+        local_dir="$local_repo/$pkg"
+
+        # CLEAN PACKAGE
+        if [[ -d "$local_dir" ]]
+        then
+          cd ~/
+          rm -rf "$local_dir"
+        fi
+
+        mkdir -p "$local_repo"
+
+        cp -r "$system_dir" "$local_dir"
+
+        # INSTALL MAKE DEPS
+        cd "$local_dir"
+
+        for makedepend in $(makepkg --printsrcinfo | grep "makedepends =" --color=never | cut -d ' ' -f 3)
+        do
+          find_and_install_pkg "$makedepend"
+        done
+
+        # install_deps "$repo" "$pkg"
+
+        # BUILD PACKAGE
+        makepkg -sc
+
+        # INSTALL PACKAGE
+        pkgver=$(makepkg --printsrcinfo | grep "pkgver =" --color=never | cut -d ' ' -f 3)
+        pkgrel=$(makepkg --printsrcinfo | grep "pkgrel =" --color=never | cut -d ' ' -f 3)
+
+        if [ -f "$pkg-$pkgver-$pkgrel-$ARCH.pkg.tar.xz" ]
+        then
+          sudo pacman -U "$pkg-$pkgver-$pkgrel-$ARCH.pkg.tar.xz"
+        else
+          sudo pacman -U "$pkg-$pkgver-$pkgrel-any.pkg.tar.xz"
+        fi
+
+        # BACKUP PACKAGE
+        mkdir -p "$CACHEDIR/$repo"
+
+        for pkg in $(ls | grep "pkg.tar.xz")
+        do
+          cp "$pkg" "$CACHEDIR/$repo"
+        done
+
+        # CLEAN PACKAGE
+        if [[ -d "$local_dir" ]]
+        then
+          cd ~/
+          rm -rf "$local_dir"
+        fi
+
+        break
+      fi
+    fi
+  fi
+done
