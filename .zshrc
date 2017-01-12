@@ -54,6 +54,7 @@ alias vim='nvim'
 alias grep='grep --color=always'
 alias pacman='pacman --color always'
 alias pacaur='pacaur --color always'
+alias ping='ping -c 4'
 
 # -> Prevents accidentally clobbering files.
 alias mkdir='mkdir -p'

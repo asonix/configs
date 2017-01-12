@@ -284,8 +284,8 @@ bar {
 ########## Styling ##########
 # class                 border  backgr. text    indicator
 client.focused          #6699cc #6699cc #fdf6e3 #6699cc
-client.focused_inactive #515151 #515151 #fdf6e3 #515151
-client.unfocused        #515151 #515151 #fdf6e3 #515151
+client.focused_inactive #393939 #393939 #fdf6e3 #393939
+client.unfocused        #393939 #393939 #fdf6e3 #393939
 client.urgent           #f2777a #f2777a #fdf6e3 #f2777a
 
 ########## i3-gaps integration ##########
