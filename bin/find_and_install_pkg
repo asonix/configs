@@ -10,11 +10,18 @@ ARCH=$(uname -m)
 IGNORELIST=("emacs" "git" "python-appdirs" "gdb" "llvm" "openmpi" "python-mock"
             "autoconf" "gtk2" "gtk3" "python-sphinks" "libxslt" "binutils"
             "python2-docutils" "python-docutils" "gobject-introspection"
-            "mesa-libgl" "lib32-mesa-libgl" "poppler-glib" "pkgconfig" "monodoc"
+            "lib32-mesa-libgl" "poppler-glib" "pkgconfig" "monodoc"
             "systemd" "python2-gobject" "python-gobject" "pygobject2-devel"
-            "python2-numpy" "python-numpy" "python2-dbus" "python-dbus" "avahi"
-            "mupdf-tools" "cups" "freetds" "libtheora" "opus" "harfbuzz"
-            "freetype2" "libmariadbclient" "libpulse" "gcc-libs" "zlib" "boost")
+            "python2-numpy" "python2-dbus" "avahi" "mupdf-tools" "cups"
+            "freetds" "libtheora" "opus" "harfbuzz" "freetype2"
+            "libmariadbclient" "libpulse" "gcc-libs" "zlib" "boost"
+            "bluez-libs" "clang" "gcc-fortran" "jdk7-openjdk" "apache-ant"
+            "gcc-ada-multilib" "gcc-multilib")
+
+pkg=$1
+pkgverdashrel=$(pacman -Ss "$pkg" --color=never | grep "/$pkg " --color=never | cut -d ' ' -f 2)
+tryrepo=$(pacman -Ss "$pkg" --color=never | grep "/$pkg " --color=never | cut -d '/' -f 1)
+
 
 function ignored_makedepend {
   makedepend=$1
@@ -44,93 +51,121 @@ function install_deps {
   done
 }
 
-pkg=$1
-pkgverdashrel=$(pacman -Ss "$pkg" --color=never | grep "/$pkg " --color=never | cut -d ' ' -f 2)
+function install_pkg {
+  repo=$1
+  pkg=$2
+  pkgverdashrel=$3
 
-repo=$(pacman -Ss "$pkg" --color=never | grep "/$pkg " --color=never | cut -d '/' -f 1)
-
-if [ -f "$CACHEDIR/$repo/$pkg-$pkgverdashrel-$ARCH.pkg.tar.xz" ]
-then
-  sudo pacman -U "$CACHEDIR/$repo/$pkg-$pkgverdashrel-$ARCH.pkg.tar.xz" --needed --noconfirm
-
-  exit 0
-else
-  if [ -f "$CACHEDIR/$repo/$pkg-$pkgverdashrel-any.pkg.tar.xz" ]
+  if [ -f "$CACHEDIR/$repo/$pkg-$pkgverdashrel-$ARCH.pkg.tar.xz" ]
   then
-    sudo pacman -U "$CACHEDIR/$repo/$pkg-$pkgverdashrel-any.pkg.tar.xz" --needed --noconfirm
+    sudo pacman -U "$CACHEDIR/$repo/$pkg-$pkgverdashrel-$ARCH.pkg.tar.xz" --noconfirm
 
-    exit 0
+    return 0
   else
-    if [ ! -d "$ABSDIR/$repo/$pkg" ]
+    if [ -f "$CACHEDIR/$repo/$pkg-$pkgverdashrel-any.pkg.tar.xz" ]
     then
-      sudo abs "$repo/$pkg"
-    fi
+      sudo pacman -U "$CACHEDIR/$repo/$pkg-$pkgverdashrel-any.pkg.tar.xz" --noconfirm
 
-    # PREPARE
-    system_dir="$ABSDIR/$repo/$pkg"
-    local_repo="$BUILDDIR/$repo"
-    local_dir="$local_repo/$pkg"
-
-    # CLEAN PACKAGE
-    if [[ -d "$local_dir" ]]
-    then
-      cd ~/
-      rm -rf "$local_dir"
-    fi
-
-    mkdir -p "$local_repo"
-
-    cp -r "$system_dir" "$local_dir"
-
-    # INSTALL MAKE DEPS
-    cd "$local_dir"
-
-    for makedepend_uf in $(makepkg --printsrcinfo | grep "makedepends =" --color=never | cut -d ' ' -f 3 | sort | uniq -u)
-    do
-      makedepend_uft=$(echo "$makedepend_uf" | cut -d '>' -f 1)
-      makedepend_uftr=$(echo "$makedepend_uft" | cut -d '<' -f 1)
-      makedepend=$(echo "$makedepend_uftr" | cut -d '=' -f 1)
-
-      if ! ignored_makedepend "$makedepend"
-      then
-        echo "Installing makedep of $pkg: $makedepend"
-        find_and_install_pkg "$makedepend"
-      fi
-    done
-
-    # install_deps "$repo" "$pkg"
-
-    # BUILD PACKAGE
-    makepkg -sc || (sudo pacman -S "$pkg" --noconfirm --needed && exit 0)
-
-    # INSTALL PACKAGE
-    pkgver=$(makepkg --printsrcinfo | grep "pkgver =" --color=never | cut -d ' ' -f 3)
-    pkgrel=$(makepkg --printsrcinfo | grep "pkgrel =" --color=never | cut -d ' ' -f 3)
-    epoch=$(makepkg --printsrcinfo | grep "epoch =" --color=never | cut -d ' ' -f 3)
-    arch=$(makepkg --printsrcinfo | grep "arch =" --color=never | cut -d ' ' -f 3 | grep "$ARCH\|any" --color=never) 
-
-    if [[ "$epoch" == "" ]]
-    then
-      sudo pacman -U "$pkg-$pkgver-$pkgrel-$arch.pkg.tar.xz" --noconfirm
+      return 0
     else
-      sudo pacman -U "$pkg-$epoch:$pkgver-$pkgrel-$arch.pkg.tar.xz" --noconfirm
+      if [ ! -d "$ABSDIR/$repo/$pkg" ]
+      then
+        sudo abs "$repo/$pkg"
+      fi
+
+      # PREPARE
+      system_dir="$ABSDIR/$repo/$pkg"
+      local_repo="$BUILDDIR/$repo"
+      local_dir="$local_repo/$pkg"
+
+      # CLEAN PACKAGE
+      if [[ -d "$local_dir" ]]
+      then
+        cd ~/
+        rm -rf "$local_dir"
+      fi
+
+      mkdir -p "$local_repo"
+
+      if ! cp -r "$system_dir" "$local_dir"
+      then
+        return 1
+      fi
+
+      # INSTALL MAKE DEPS
+      cd "$local_dir"
+
+      # for makedepend_uf in $(makepkg --printsrcinfo | grep "makedepends =" --color=never | cut -d ' ' -f 3 | sort | uniq -u)
+      # do
+      #   makedepend_uft=$(echo "$makedepend_uf" | cut -d '>' -f 1)
+      #   makedepend_uftr=$(echo "$makedepend_uft" | cut -d '<' -f 1)
+      #   makedepend=$(echo "$makedepend_uftr" | cut -d '=' -f 1)
+
+      #   if ! ignored_makedepend "$makedepend"
+      #   then
+      #     echo "Installing makedep of $pkg: $makedepend"
+      #     find_and_install_pkg "$makedepend"
+      #   fi
+      # done
+
+      # install_deps "$repo" "$pkg"
+
+      # BUILD PACKAGE
+      if ! makepkg -sc
+      then
+        echo "NOT BUILT"
+        return 0
+      fi
+
+      # INSTALL PACKAGE
+      pkgver=$(makepkg --printsrcinfo | grep "pkgver =" --color=never | cut -d ' ' -f 3)
+      pkgrel=$(makepkg --printsrcinfo | grep "pkgrel =" --color=never | cut -d ' ' -f 3)
+      epoch=$(makepkg --printsrcinfo | grep "epoch =" --color=never | cut -d ' ' -f 3)
+      arch=$(makepkg --printsrcinfo | grep "arch =" --color=never | cut -d ' ' -f 3 | grep "$ARCH\|any" --color=never) 
+
+      if [[ "$epoch" == "" ]]
+      then
+        if ! sudo pacman -U "$pkg-$pkgver-$pkgrel-$arch.pkg.tar.xz" --noconfirm
+        then
+          echo "NOT INSTALLED"
+        fi
+      else
+        if ! sudo pacman -U "$pkg-$epoch:$pkgver-$pkgrel-$arch.pkg.tar.xz" --noconfirm
+        then
+          echo "NOT INSTALLED"
+        fi
+      fi
+
+      # BACKUP PACKAGE
+      mkdir -p "$CACHEDIR/$repo"
+
+      for pkg in $(ls | grep "pkg.tar.xz")
+      do
+        cp "$pkg" "$CACHEDIR/$repo"
+      done
+
+      # CLEAN PACKAGE
+      if [[ -d "$local_dir" ]]
+      then
+        cd ~/
+        rm -rf "$local_dir"
+      fi
+
+      return 0
     fi
-
-    # BACKUP PACKAGE
-    mkdir -p "$CACHEDIR/$repo"
-
-    for pkg in $(ls | grep "pkg.tar.xz")
-    do
-      cp "$pkg" "$CACHEDIR/$repo"
-    done
-
-    # CLEAN PACKAGE
-    if [[ -d "$local_dir" ]]
-    then
-      cd ~/
-      rm -rf "$local_dir"
-    fi
-
-    exit 0
   fi
+}
+
+if [ "$tryrepo" == "" ]
+then
+  for testrepo in ${REPOS[@]}
+  do
+    if install_pkg "$testrepo" "$pkg" "$pkgverdashrel"
+    then
+      break
+    fi
+  done
+else
+  install_pkg "$tryrepo" "$pkg" "$pkgverdashrel"
 fi
+
