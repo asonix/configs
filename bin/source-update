@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
-
-function update_abs {
-  sudo pacman -Sy
-  sudo abs
-}
-
-update_abs
+sudo pacman -Sy
+sudo abs
 
 for pkg in $(pacman -Qu --color=never | cut -d ' ' -f 1)
 do
