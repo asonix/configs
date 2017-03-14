@@ -1,5 +1,5 @@
 # Base16 Shell
-BASE16_SHELL="$HOME/Development/git/base16-shell/scripts/base16-eighties.sh"
+BASE16_SHELL="$HOME/Development/git/base16-shell/scripts/base16-ocean.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Z
@@ -273,6 +273,7 @@ zstyle ':completion:*' menu select
 setopt completealiases
 
 if which rbenv > /dev/null 2> /dev/null; then eval "$(rbenv init -)"; fi
+if which pyenv > /dev/null 2> /dev/null; then eval "$(pyenv init -)"; fi
 if which exenv > /dev/null 2> /dev/null; then eval "$(exenv init -)"; fi
 
 # xset r rate 225 40
