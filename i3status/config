@@ -7,11 +7,12 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
+  separator       = " | "
   colors          = true
   interval        = 5
-  color_good      = "#6699cc"
-  color_bad       = "#f2777a"
-  color_degraded  = "#ffcc66"
+  color_good      = "#8fa1b3"
+  color_bad       = "#bf616a"
+  color_degraded  = "#ebcb8b"
 }
 
 order += "wireless _first_"
@@ -26,7 +27,7 @@ wireless _first_ {
 
 ethernet _first_ {
   # if you use %speed, i3status requires root privileges
-  format_up = "E: %ip (%speed)"
+  format_up = "E: %ip"
   format_down = "E: down"
 }
 

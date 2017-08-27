@@ -10,14 +10,16 @@ Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'rust-lang/rust.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
-colorscheme base16-eighties
+colorscheme base16-mocha
 let base16colorspace=256
 set background=dark " dark | light "
 hi Normal ctermbg=none
@@ -65,7 +67,7 @@ let g:syntastic_cpp_no_default_include_dirs = 1
 let g:syntastic_cpp_auto_refresh_includes = 1
 
 let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++14'
+let g:syntastic_cpp_compiler_options = ' -std=c++14 -DRILEYS_COMPUTER'
 
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_python_pyflakes_exec = '/usr/bin/pyflakes-python2'
