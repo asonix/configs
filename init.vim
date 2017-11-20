@@ -77,10 +77,27 @@ let g:syntastic_enable_elixir_checker = 1
 
 let g:syntastic_javascript_checkers = ['jshint']
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:elm_syntastic_show_warnings = 1
+let g:elm_jump_to_error = 1
+let g:elm_make_output_file = "main.js"
+let g:elm_make_show_warnings = 1
+let g:elm_browser_command = ""
+let g:elm_detailed_complete = 1
+let g:elm_format_autosave = 1
+let g:elm_format_fail_silently = 0
+let g:elm_setup_keybindings = 1
+
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 
 let g:rustfmt_autosave = 1
+
+let g:syntastic_rust_rustc_exe = 'cargo check'
+let g:syntastic_rust_rustc_fname = ''
+let g:syntastic_rust_rustc_args = '--'
+let g:syntastic_rust_checkers = ['rustc']
 
 nmap <f8> :TagbarToggle<CR>
 nmap <f9> :!pdflatex %<CR>

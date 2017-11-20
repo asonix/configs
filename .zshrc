@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/Development/git/base16-shell/scripts/base16-mocha.sh"
+BASE16_SHELL="$HOME/Development/git/base16-shell/scripts/base16-eighties.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Z
@@ -120,6 +120,13 @@ setopt HIST_IGNORE_DUPS
 #-------------------
 # Personnal Aliases
 #-------------------
+
+alias mount='echo "aroo??"'
+alias umount='echo "awwwww :c"'
+alias unyiff='/bin/umount'
+alias yiff='/bin/mount'
+
+alias quickly='sudo'
 
 alias testpl='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
 
