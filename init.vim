@@ -9,6 +9,7 @@ Plug 'ElmCast/elm-vim'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -42,6 +43,8 @@ set ignorecase
 set smartcase
 
 set backspace=indent,eol,start
+
+set hidden
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/dart-vim-plugin
@@ -94,12 +97,21 @@ let g:tex_flavor = "latex"
 
 let g:rustfmt_autosave = 1
 
+let g:racer_cmd = "/usr/bin/racer"
+let g:racer_experimental_completer = 1
+
 let g:syntastic_rust_rustc_exe = 'cargo check'
 let g:syntastic_rust_rustc_fname = ''
 let g:syntastic_rust_rustc_args = '--'
 let g:syntastic_rust_checkers = ['rustc']
 
-nmap <f8> :TagbarToggle<CR>
-nmap <f9> :!pdflatex %<CR>
+au FileType c nmap <f8> :TagbarToggle<CR>
+au FileType cpp nmap <f8> :TagbarToggle<CR>
+au FileType latex nmap <f9> :!pdflatex %<CR>
 
-set clipboard+=unnamedplus
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+" set clipboard+=unnamedplus

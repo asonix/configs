@@ -95,10 +95,10 @@ set :skip_urgent_warp, false
 # http://subforge.org/projects/subtle/wiki/Panel
 #
 
-screen 1 do
-  top    [ :views, :title, :spacer, :keychain, :spacer, :tray, :sublets ]
-  bottom [ ]
-end
+# screen 1 do
+#   top    [ :views, :title, :spacer, :keychain, :spacer, :tray, :sublets ]
+#   bottom [ ]
+# end
 
 # Example for a second screen:
 #screen 2 do
@@ -507,7 +507,8 @@ grab "W-KP_3", [:bottom_right6666, :bottom_right5050, :bottom_right3333,
 #grab "W-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 
 # Exec programs
-grab "W-Return", "gnome-terminal"
+# grab "W-Return", "pantheon-terminal"
+grab "W-Return", "urxvt"
 
 # Run Ruby lambdas
 grab "S-F2" do |c|

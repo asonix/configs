@@ -8,7 +8,9 @@ export DEFAULT_USER=asonix
 export LO_USE_NOTEBOOKBAR=1
 
 export EDITOR=nvim
-export BROWSER=epiphany
+export BROWSER=firefox
+
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 typeset -U path
 path=(/root/.gem/ruby/2.2.0/bin ~/.node_modules_global/bin ~/Development/git/flutter/bin $(ruby -e 'print Gem.user_dir')/bin ~/.local/bin ~/.cargo/bin $path[@])

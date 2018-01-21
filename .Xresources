@@ -70,7 +70,8 @@ XTerm*borderWidth: 0
 URxvt*depth: 32
 URxvt*background: rgba:0000/0000/0000/fc00
 
-*font: xft:monofur for powerline:size=12
+*font: xft:Fantasque Sans Mono:pixelsize=32
+! *font: xft:monofur for powerline:size=12
 URxvt*letterSpace: -1
 URxvt*urlLauncher: firefox
 URxvt*scrollBar: false

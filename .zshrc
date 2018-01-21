@@ -121,6 +121,8 @@ setopt HIST_IGNORE_DUPS
 # Personnal Aliases
 #-------------------
 
+alias rust-arvm7h-musl-builder='docker run --rm -it -v "$(pwd)":/home/rust/src messense/rust-musl-cross:armv7-musleabihf'
+alias rust-amd64-musl-builder='docker run --rm -it -v "$(pwd)":/home/rust/src messense/rust-musl-cross:x86_64-musl'
 alias mount='echo "aroo??"'
 alias umount='echo "awwwww :c"'
 alias unyiff='/bin/umount'
@@ -191,3 +193,6 @@ if which exenv > /dev/null 2> /dev/null; then eval "$(exenv init -)"; fi
 
 PROMPT="${PROMPT} "
 PS2="${PS2}  "
+
+# added by travis gem
+[ -f /home/asonix/.travis/travis.sh ] && source /home/asonix/.travis/travis.sh
